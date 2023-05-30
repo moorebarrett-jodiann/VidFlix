@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="author" content="Jodi-Ann Barrett"/>
+        <meta name="description" content="VidFlix"/>
+        <meta name="keywords" content="Fetch API, JavaScript, ES6"/>
+        <link rel="shortcut icon" href="src/images/favicon.png?v=2" type="image/x-icon"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="src/stylesheet/index.css" media="all"/>
+        <script src="src/scripts/index.js" type="module"></script>
+        <title>VidFlix</title>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="container flexbox">
+                    <div class="logo-container"></div>
+                    <div class="nav-container">
+                        <nav>
+                            <ul>
+                                <li><a href="#">Movies</a></li>
+                                <li><a href="#">Theatres</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#"><i class="fa-solid fa-users"></i>  My Account</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="burger-menu"><i class="fa-solid fa-bars"></i></div>
+                </div>
+            </header>
+            <section>
+                <div class="filter-container">
+                    <input type="text" placeholder="Search Movie Titles">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search">
+                        <button>Search</button>
+                    </div>
+                </div>
+                <div class="movie-grid"></div>
+            </section>
+        </main>
+    </body>
+</html>

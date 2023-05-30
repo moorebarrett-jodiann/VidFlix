@@ -1,0 +1,23 @@
+{
+  "name": "vidflix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moorebarrett-jodiann/VidFlix.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moorebarrett-jodiann/VidFlix/issues"
+  },
+  "homepage": "https://github.com/moorebarrett-jodiann/VidFlix#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
