@@ -19,29 +19,31 @@
         <main>
             <header>
                 <div class="container flexbox">
-                    <div class="logo-container"></div>
+                    <div class="logo-container"><h2>VidFlix</h2></div>
                     <div class="nav-container">
                         <nav>
                             <ul>
-                                <li><a href="#">Movies</a></li>
+                                <li class="default"><a href="#">Movies</a></li>
                                 <li><a href="#">Theatres</a></li>
                                 <li><a href="#">About</a></li>
-                                <li><a href="#"><i class="fa-solid fa-users"></i> My Account</a></li>
+                                <li><a href="#">My Account</a></li>
                             </ul>
                         </nav>
                     </div>
                     <div class="burger-menu"><i class="fa-solid fa-bars"></i></div>
                 </div>
             </header>
-            <section>
-                <div class="filter-container">
-                    <input type="text" placeholder="Search Movie Titles">
-                    <div class="search-container">
-                        <input type="text" placeholder="Search">
-                        <button>Search</button>
+            <section class="main">
+                <div class="movie-container container">
+                    <div class="filter-container flexbox">
+                        <input class="title-search" type="text" placeholder="Search Movie Titles">
+                        <div class="search-container flexbox">
+                            <input type="text" placeholder="Search">
+                            <button class="cta">Search</button>
+                        </div>
                     </div>
+                    <div class="movie-grid"></div>
                 </div>
-                <div class="movie-grid"></div>
             </section>
         </main>
     </body>

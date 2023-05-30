@@ -1,0 +1,141 @@
+@import "./base.css";
+
+/* ======= HEADER ========*/
+header .flexbox {
+    justify-content: space-between;
+}
+
+header .logo-container h2 {
+    font-size: var(--app-h2);
+    color: var(--app-pink);
+}
+
+header .logo-container h2:hover {
+    cursor: pointer;
+}
+
+/* Show reular nav menu when screen width is 923px and above */
+@media only screen and (min-width: 923px) { 
+
+    .burger-menu {
+        visibility: hidden;
+        display: none
+    }
+    
+    .burger-menu i {
+        visibility: hidden;
+        display: none
+    }
+    
+    nav ul {
+        list-style: none;
+    }
+    
+    nav ul li {
+        visibility: visible;
+        display: inline;
+    }
+
+    nav ul li + li {
+        margin-left: 30px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: var(--app-letter-spacing);
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--app-light-text-color);
+        position: relative;
+        transition: var(--app-transition);
+    }
+
+    nav ul li.default a {
+        color: var(--app-pink);
+    }
+
+    nav ul li a:hover {
+        color: var(--app-pink);
+    }
+}
+
+
+/* Show hamburger icon when screen width is below 922px */
+@media only screen and (max-width: 922px) {
+    nav {
+        visibility: hidden;
+        display: none;
+    }
+    
+    .burger-menu {
+        visibility: visible;
+        display: inline;
+        color: var(--app-light-text-color);
+        font-size: 16px;
+        margin-right: 20px;
+        transition: var(--app-transition);
+    }
+    
+    .burger-menu:hover {
+        color: var(--app-pink);
+        cursor: pointer;
+    }
+}
+
+/* ========= MAIN ===============*/
+section .movie-container {
+    padding: 40px 0px;
+}
+
+section .movie-container .filter-container .title-search {
+    width: 70%;
+    margin-right: 10px;
+    height: 46px;
+    padding: 15px 4%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--app-border-radius);
+    box-shadow: var(--app-navy-shadow);
+    font-size: var(--app-p-font-regular);
+    color: var(--app-light-text-color);
+    background:  rgb(255 255 255 / 0.1) url("../images/search.png") no-repeat 15px 14px;
+    border: 1px solid transparent;
+}
+
+section .movie-container .filter-container .title-search:focus {
+    border: 1px solid rgba(255, 255, 255, 0.041);
+}
+
+section .movie-container .filter-container .search-container {
+    width: 30%;
+    height: 46px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--app-border-radius);
+    box-shadow: var(--app-navy-shadow);
+    font-size: var(--app-p-font-regular);
+    align-items: center;
+    justify-content: center;
+}
+
+section .movie-container .filter-container .search-container input[type="text"] {
+    width: 70%;
+    height: 100%;
+    background: transparent url("../images/pin.png") no-repeat 15px 14px;
+    padding: 15px 0 15px 13%;
+    color: var(--app-light-text-color);
+    font-size: var(--app-p-font-regular);
+}
+
+section .movie-container .filter-container .search-container button {
+    width: 30%;
+    height: 75%;
+    margin-right: 5px;
+    border-radius: var(--app-border-radius);
+    background-color: var(--app-pink);
+    color: var(--app-light-text-color);
+    transition: var(--app-transition);
+}
+
+section .movie-container .filter-container .search-container button:hover {
+    background-color: var(--app-pink-hover);
+}
