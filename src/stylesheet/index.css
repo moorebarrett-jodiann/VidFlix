@@ -132,31 +132,43 @@ section .main-container .filter-container .autocomplete-movies .autocomplete-res
 
 section .main-container .filter-container .autocomplete-movies .autocomplete-results .autocomplete-item {
     padding: 10px;
-    cursor: pointer;
     background-color: var(--app-medium-grey);
     border-bottom: var(--app-rich-black);
     color: var(--app-light-text-color);
 }
 
-section .main-container .filter-container .autocomplete-movies .autocomplete-results .autocomplete-item:hover {
+section .main-container .filter-container .autocomplete-movies .autocomplete-results .autocomplete-item:not(.not-found) {
+    cursor: pointer;
+}
+
+section .main-container .filter-container .autocomplete-movies .autocomplete-results .autocomplete-item:not(.not-found):hover {
     background-color: var(--app-light-bg);
     color: var(--app-dark-text-color);
 }
 
-section .main-container .filter-container .autocomplete-movies .title-search {
-    width: 100%;
+section .main-container .filter-container .autocomplete-movies .movie-search-container {
     height: 46px;
-    padding: 15px 4%;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: var(--app-border-radius);
     box-shadow: var(--app-navy-shadow);
     font-size: var(--app-p-font-regular);
+    align-items: center;
+    justify-content: center;
+}
+
+section .main-container .filter-container .autocomplete-movies .movie-search-container .title-search {
+    height: 100%;
+    width: 100%;
+    background: transparent url(../images/search.png) no-repeat 15px 14px;
+    padding-left: 40px;
     color: var(--app-light-text-color);
-    background:  rgb(255 255 255 / 0.1) url("../images/search.png") no-repeat 15px 14px;
+    font-size: var(--app-p-font-regular);
     border: 1px solid transparent;
 }
 
-section .main-container .filter-container .autocomplete-movies .title-search:focus {
+section .main-container .filter-container .autocomplete-movies .movie-search-container .title-search:focus, .movie-search-container {
     border: 1px solid rgba(255, 255, 255, 0.041);
+    border-radius: var(--app-border-radius);
 }
 
 section .main-container .filter-container .autocomplete-cities {
@@ -175,47 +187,60 @@ section .main-container .filter-container .autocomplete-cities .autocomplete-res
 
 section .main-container .filter-container .autocomplete-cities .autocomplete-results .autocomplete-item {
     padding: 10px;
-    cursor: pointer;
     background-color: var(--app-medium-grey);
     border-bottom: var(--app-rich-black);
     color: var(--app-light-text-color);
 }
 
-section .main-container .filter-container .autocomplete-cities .autocomplete-results .autocomplete-item:hover {
+section .main-container .filter-container .autocomplete-cities .autocomplete-results .autocomplete-item:not(.not-found) {
+    cursor: pointer;
+}
+
+section .main-container .filter-container .autocomplete-cities .autocomplete-results .autocomplete-item:not(.not-found):hover {
     background-color: var(--app-light-bg);
     color: var(--app-dark-text-color);
 }
 
-section .main-container .filter-container .search-container {
+section .main-container .filter-container .city-search-container {
     height: 46px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: var(--app-border-radius);
     box-shadow: var(--app-navy-shadow);
     font-size: var(--app-p-font-regular);
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    padding-right:5px;
 }
 
-section .main-container .filter-container .search-container .city-search {
-    width: 75%;
+section .main-container .filter-container .city-search-container .city-search {
     height: 100%;
-    background: transparent url("../images/pin.png") no-repeat 15px 14px;
-    padding: 15px 0 15px 10%;
+    width: 100%;
+    background: transparent url(../images/pin.png) no-repeat 15px 14px;
+    padding-left: 40px;
     color: var(--app-light-text-color);
     font-size: var(--app-p-font-regular);
+    border: 1px solid transparent;
 }
 
-section .main-container .filter-container .search-container button {
-    width: 25%;
-    height: 75%;
-    margin-right: 5px;
+section .main-container .filter-container .city-search-container .city-search:focus, .city-search-container {
+    border: 1px solid rgba(255, 255, 255, 0.041);
+    border-radius: var(--app-border-radius);
+}
+
+section .main-container .filter-container .city-search-container .cta {
+    display: flex;
+    align-items: center;
+}
+
+section .main-container .filter-container .city-search-container button {
+    padding: 8px 18px;
     border-radius: var(--app-border-radius);
     background-color: var(--app-pink);
+    font-size: var(--app-p-font-regular);
     color: var(--app-light-text-color);
     transition: var(--app-transition);
 }
 
-section .main-container .filter-container .search-container button:hover {
+section .main-container .filter-container .city-search-container button:hover {
     background-color: var(--app-pink-hover);
 }
 
@@ -257,9 +282,15 @@ section .main-container .movie-grid {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
     section .main-container .movie-grid {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
     }
+}
+
+section .main-container .movie-grid .movie-card p.title{
+    font-size: var(--app-p-font-regular);
+    color: var(--app-light-text-color);
+    margin-top: 10px;
 }

@@ -1,10 +1,11 @@
 'use-strict';
 
 import {select, print, onEvent } from './utils.js';
-import cityInfo from './cities.json' assert { type: "json" };;
+import cityInfo from './cities.json' assert { type: "json" };
 import movieInfo from './movie-titles.json' assert { type: "json" };
 
-const citySearchInput = select('section .main-container .filter-container .search-container .city-search');
+// ======== VARIABLES =====================================================================================================
+const citySearchInput = select('section .main-container .filter-container .city-search-container .city-search');
 const citiesUrl = "./src/scripts/cities.json";
 
 const movieSearchInput = select('section .main-container .filter-container .title-search');
@@ -26,9 +27,11 @@ const options = {
     mode: 'cors'
 };
 
+// ======== FUNCTIONS =====================================================================================================
+
 // populate movie poster grid
 function printMovies() {
-    fetch(moviesUrl)
+    fetch(moviesUrl, options)
         .then(response => response.json())
         .then(data => {
         movieList.innerHTML = "";
@@ -36,26 +39,23 @@ function printMovies() {
 
         if (data.movies.length > 0) {
             data.movies.forEach(movie => {
-            movieCard += `
+                movieCard += `
                 <div class="movie-card">
-                <img class="movie-img" src="${movie.image}" alt="${movie.title}">
-                <p class="title">${movie.title}</p>
+                    <img class="movie-img" src="${movie.image}" alt="${movie.title}">
+                    <p class="title">${movie.title}</p>
                 </div>
-            `;
+                `;
             });
         } else {
             movieCard += `<div>Movies not found</div>`;
         }
-
+        
         movieList.innerHTML = movieCard;
-        })
-        .catch(error => {
+    })
+    .catch(error => {
         console.error('Error fetching movie titles:', error);
-        });
+    });
 }
-
-// fetch movie posters and populate grid
-printMovies();
 
 // Fetch the movie titles from the JSON file and populate an array to be used for autocomplete
 function populateAutoCompleteMovieSearchList() {
@@ -85,7 +85,8 @@ function populateAutoCompleteCitySearchList() {
 function showAutocompleteSuggestions(input) {
     const inputValue = input.value.toLowerCase(); 
     let autocompleteSuggestions = "";
-
+    
+    // filter suggestions to those that include the sequence of characters entered
     if(input === movieSearchInput) {
         autocompleteSuggestions = movieTitles.filter(title => title.toLowerCase().includes(inputValue));
     } else {
@@ -95,36 +96,62 @@ function showAutocompleteSuggestions(input) {
     // Clear previous suggestions
     clearAutocompleteSuggestions();
 
-    // Render new autocomplete suggestions
-    autocompleteSuggestions.forEach(suggestion => {
-        const suggestionItem = document.createElement('div');
-        suggestionItem.classList.add('autocomplete-item');
-        suggestionItem.textContent = suggestion;
+    // if user input is not found add a "Not found" item
+    if (autocompleteSuggestions.length === 0) {
+
+        // Add a default "Movie not found" or "City not found" suggestion
+        const notFoundSuggestion = document.createElement('div');
+        notFoundSuggestion.classList.add('autocomplete-item', 'not-found');
+        notFoundSuggestion.textContent = input === movieSearchInput ? 'Movie not found' : 'City not found';
         
-        // set text of clicked suggestion to input field
-        suggestionItem.addEventListener('click', () => {
-            input.value = suggestion;
-            clearAutocompleteSuggestions();
-        });
-        
-        if(input === movieSearchInput) {
-            movieAutocompleteResults.appendChild(suggestionItem);
+        if (input === movieSearchInput) {
+          movieAutocompleteResults.appendChild(notFoundSuggestion);
         } else {
-            cityAutocompleteResults.appendChild(suggestionItem);
+          cityAutocompleteResults.appendChild(notFoundSuggestion);
         }
-    });
+
+    } else {
+    
+        // Render new autocomplete suggestions
+        autocompleteSuggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.classList.add('autocomplete-item');
+            suggestionItem.textContent = suggestion;
+
+            // Create a new string with matching characters wrapped in a <span> tag with class "match"
+            // RegExp flags 'g' is for 'global(all occurences)' and 'i' stands for case-insensitive
+            const highlightedSuggestion = suggestion.replace(new RegExp(inputValue, 'gi'), match => `<span class="match">${match}</span>`);
+            suggestionItem.innerHTML = highlightedSuggestion;
+            
+            // set text of clicked suggestion to input field
+            suggestionItem.addEventListener('click', () => {
+                input.value = suggestion;
+                clearAutocompleteSuggestions();
+            });
+            
+            if(input === movieSearchInput) {
+                movieAutocompleteResults.appendChild(suggestionItem);
+            } else {
+                cityAutocompleteResults.appendChild(suggestionItem);
+            }
+        });
+    }
 }
-  
-// Function to clear autocomplete suggestions
+
+// Function to clear all autocomplete suggestions if there is a list visible
 function clearAutocompleteSuggestions() {
     while (movieAutocompleteResults.firstChild) {
         movieAutocompleteResults.removeChild(movieAutocompleteResults.firstChild);
-    }
-    
+    }    
     while (cityAutocompleteResults.firstChild) {
         cityAutocompleteResults.removeChild(cityAutocompleteResults.firstChild);
     }
 }
+
+// ======== FUNCTION CALLS ===============================================================================================
+
+// fetch movie posters and populate grid
+printMovies();
 
 // Load the movie autocomplete search lists and then invoke the keyup bindings
 populateAutoCompleteMovieSearchList().then(() => {
@@ -158,3 +185,7 @@ document.addEventListener('click', function(event) {
         clearAutocompleteSuggestions();
     }
 });
+
+window.onload = function () {
+    citySearchInput.value = "Winnipeg";
+};
