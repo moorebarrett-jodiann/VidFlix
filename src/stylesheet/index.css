@@ -291,7 +291,7 @@ section .main-container .movie-grid .movie-card .info .category {
     color: var(--app-light-text-color);
     display: flex;
     justify-content: center;
-    font-size: var(--app-p-font-small);
+    font-size: var(--app-p-font-xsmall);
 }
 
 section .main-container .movie-grid .movie-card .info .category .genre {
