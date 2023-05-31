@@ -38,7 +38,7 @@ When the browser is resized to fit tablet or mobile dimensions, the horizontal n
 
 #### :label: Responsive Page Content
 
-When the browser is resized to fit tablet or mobile dimensions, the main content adjusts from a 6 column display to 5, 4, 3, 2 and a 1 column display, where movie cards are gradually stacked on top of each other.
+When the browser is resized to fit tablet or mobile dimensions, the main content adjusts to grid column fractions from 1 to 6.
 
 ### Fetch API
 
