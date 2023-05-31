@@ -98,27 +98,31 @@ const options = {
 };
 
 // Fetch the movie titles from the JSON file and populate an array to be used for autocomplete
-function populateAutoCompleteMovieSearchList() {
-    return fetch(moviesUrl)
-        .then(response => response.json())
-        .then(data => {
-            movieTitles.push(...data.movies.map(movie => movie.title));
-        })
-        .catch(error => {
-            console.error('Error fetching movie titles:', error);
-        });
+async function populateAutoCompleteMovieSearchList() {
+    try {
+        const response = await fetch(moviesUrl, options);
+        if (!response.ok) {
+            throw new Error(`${response.statusText} (${response.status})`);
+        }
+        const data = await response.json();
+        movieTitles.push(...data.movies.map(movie => movie.title));
+    } catch (error) {
+        console.error('Error fetching movie titles:', error);
+    }
 }
 
 // Fetch the cities from the JSON file and populate an array to be used for autocomplete
-function populateAutoCompleteCitySearchList() {
-    return fetch(citiesUrl)
-        .then(response => response.json())
-        .then(data => {
-            cities.push(...data.cities.map(city => city.name));
-        })
-        .catch(error => {
-            console.error('Error fetching cities:', error);
-        });
+async function populateAutoCompleteCitySearchList() {
+    try {
+        const response = await fetch(citiesUrl, options);
+        if (!response.ok) {
+            throw new Error(`${response.statusText} (${response.status})`);
+        }
+        const data = await response.json();
+        cities.push(...data.cities.map(city => city.name));
+    } catch (error) {
+        console.error('Error fetching cities:', error);
+    }
 }
 
 // Load the movie autocomplete search lists and then invoke the keyup bindings
