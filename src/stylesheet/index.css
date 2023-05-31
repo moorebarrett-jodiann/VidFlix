@@ -92,11 +92,39 @@ section .main-container .filter-container {
     margin-bottom: 20px;
 }
 
-section .main-container .filter-container .title-search {
+section .main-container .filter-container .autocomplete {
     width: 70%;
     margin-right: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+section .main-container .filter-container .autocomplete .autocomplete-results {
+    position: absolute;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+section .main-container .filter-container .autocomplete .autocomplete-results .autocomplete-item {
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: var(--app-rich-black);
+    color: var(--app-light-text-color);
+}
+
+section .main-container .filter-container .autocomplete .autocomplete-results .autocomplete-item:hover {
+    background-color: #e9e9e9;
+    color: var(--app-dark-ext-color);
+}
+
+section .main-container .filter-container .autocomplete .title-search {
+    width: 100%;
     height: 46px;
-    padding: 15px 3%;
+    padding: 15px 4%;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: var(--app-border-radius);
     box-shadow: var(--app-navy-shadow);
@@ -106,7 +134,7 @@ section .main-container .filter-container .title-search {
     border: 1px solid transparent;
 }
 
-section .main-container .filter-container .title-search:focus {
+section .main-container .filter-container .autocomplete .title-search:focus {
     border: 1px solid rgba(255, 255, 255, 0.041);
 }
 
