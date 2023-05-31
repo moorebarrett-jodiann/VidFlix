@@ -4,17 +4,17 @@ import {select, print, onEvent } from './utils.js';
 import cityInfo from './cities.json' assert { type: "json" };;
 import movieInfo from './movie-titles.json' assert { type: "json" };
 
-const citySearchInput = select('section .main-container .filter-container .search-container input[type="text"]');
+const citySearchInput = select('section .main-container .filter-container .search-container .city-search');
 const citiesUrl = "./src/scripts/cities.json";
 
 const movieSearchInput = select('section .main-container .filter-container .title-search');
 const moviesUrl = "./src/scripts/movie-titles.json";
 
 const movieList = select('.movie-grid');
-const movieAutocompleteResults = select('.autocomplete-results');
+const movieAutocompleteResults = select('section .main-container .filter-container .autocomplete-movies .autocomplete-results');
+const cityAutocompleteResults = select('section .main-container .filter-container .autocomplete-cities .autocomplete-results');
 
 const movieTitles = [];
-const movieImages = [];
 const cities = [];
 
 // setup options
@@ -29,51 +29,32 @@ const options = {
 // populate movie poster grid
 function printMovies() {
     fetch(moviesUrl)
-      .then(response => response.json())
-      .then(data => {
+        .then(response => response.json())
+        .then(data => {
         movieList.innerHTML = "";
         let movieCard = "";
-  
+
         if (data.movies.length > 0) {
-          data.movies.forEach(movie => {
+            data.movies.forEach(movie => {
             movieCard += `
-              <div class="movie-card">
+                <div class="movie-card">
                 <img class="movie-img" src="${movie.image}" alt="${movie.title}">
                 <p class="title">${movie.title}</p>
-              </div>
+                </div>
             `;
-          });
+            });
         } else {
-          movieCard += `<div>Movies not found</div>`;
+            movieCard += `<div>Movies not found</div>`;
         }
-  
+
         movieList.innerHTML = movieCard;
-      })
-      .catch(error => {
+        })
+        .catch(error => {
         console.error('Error fetching movie titles:', error);
-      });
-  }
+        });
+}
 
-// reusable method to fetch from json source
-// async function getArray(url) {
-//     try {
-//         const response = await fetch(url, options);
-
-//         if(!response.ok) {
-//             throw new Error(`${response.statusText} (${response.status})`);
-//         }
-
-//         const data = await response.json();
-//         console.log(data);
-//         return data;
-//     }
-//     catch(error) {
-//         print(error.Message);
-//         return []
-//     }
-// }
-
-// // fetch movie posters and populate grid
+// fetch movie posters and populate grid
 printMovies();
 
 // Fetch the movie titles from the JSON file and populate an array to be used for autocomplete
@@ -88,10 +69,28 @@ function populateAutoCompleteMovieSearchList() {
         });
 }
 
+// Fetch the cities from the JSON file and populate an array to be used for autocomplete
+function populateAutoCompleteCitySearchList() {
+    return fetch(citiesUrl)
+        .then(response => response.json())
+        .then(data => {
+            cities.push(...data.cities.map(city => city.name));
+        })
+        .catch(error => {
+            console.error('Error fetching cities:', error);
+        });
+}
+
 // Function to filter and display autocomplete suggestions
 function showAutocompleteSuggestions(input) {
-    const inputValue = input.value.toLowerCase();    
-    const autocompleteSuggestions = movieTitles.filter(title => title.toLowerCase().includes(inputValue));
+    const inputValue = input.value.toLowerCase(); 
+    let autocompleteSuggestions = "";
+
+    if(input === movieSearchInput) {
+        autocompleteSuggestions = movieTitles.filter(title => title.toLowerCase().includes(inputValue));
+    } else {
+        autocompleteSuggestions = cities.filter(name => name.toLowerCase().includes(inputValue));
+    }    
     
     // Clear previous suggestions
     clearAutocompleteSuggestions();
@@ -108,7 +107,11 @@ function showAutocompleteSuggestions(input) {
             clearAutocompleteSuggestions();
         });
         
-        movieAutocompleteResults.appendChild(suggestionItem);
+        if(input === movieSearchInput) {
+            movieAutocompleteResults.appendChild(suggestionItem);
+        } else {
+            cityAutocompleteResults.appendChild(suggestionItem);
+        }
     });
 }
   
@@ -117,9 +120,13 @@ function clearAutocompleteSuggestions() {
     while (movieAutocompleteResults.firstChild) {
         movieAutocompleteResults.removeChild(movieAutocompleteResults.firstChild);
     }
+    
+    while (cityAutocompleteResults.firstChild) {
+        cityAutocompleteResults.removeChild(cityAutocompleteResults.firstChild);
+    }
 }
 
-// Load the autocomplete search lists and then invoke the keyup bindings
+// Load the movie autocomplete search lists and then invoke the keyup bindings
 populateAutoCompleteMovieSearchList().then(() => {
     onEvent('keyup', movieSearchInput, () => {
         const input = movieSearchInput;
@@ -132,9 +139,22 @@ populateAutoCompleteMovieSearchList().then(() => {
     });
 });
 
+// Load the city autocomplete search lists and then invoke the keyup bindings
+populateAutoCompleteCitySearchList().then(() => {
+    onEvent('keyup', citySearchInput, () => {
+        const input = citySearchInput;
+        showAutocompleteSuggestions(input);
+
+        // Check if input is empty and call clearAutocompleteSuggestions
+        if (input.value === '') {
+            clearAutocompleteSuggestions();
+        }
+    });
+});
+
 // if any area outside the movie title search box is clicked, close the suggestions
 document.addEventListener('click', function(event) {
-    if (event.target !== movieSearchInput) {
+    if (event.target !== movieSearchInput && event.target !== citySearchInput) {
         clearAutocompleteSuggestions();
     }
 });
