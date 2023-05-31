@@ -1,8 +1,8 @@
 'use-strict';
 
 import {select, print, onEvent } from './utils.js';
-import cityInfo from './cities.json' assert { type: "json" };
-import movieInfo from './movie-titles.json' assert { type: "json" };
+import cityInfo from './cities.js';
+import movieInfo from './movie-titles.js';
 
 // ======== VARIABLES =====================================================================================================
 const citySearchInput = select('section .main-container .filter-container .city-search-container .city-search');
@@ -39,9 +39,18 @@ function printMovies() {
 
         if (data.movies.length > 0) {
             data.movies.forEach(movie => {
+
+                const categories = movie.categories.map(category => `<span class="genre">${category}</span>`).join('');
+                
                 movieCard += `
                 <div class="movie-card">
-                    <img class="movie-img" src="${movie.image}" alt="${movie.title}">
+                    <div class="overlay">
+                        <div class="info">
+                            <p class="year">${movie.year}</p>
+                            <p class="category">${categories}</p>
+                        </div>
+                        </div>
+                        <img class="movie-img" src="${movie.image}" alt="${movie.title}">
                     <p class="title">${movie.title}</p>
                 </div>
                 `;

@@ -27,7 +27,7 @@
     --app-pink:#be236a;
     --app-pink-hover:#9e255b;
     --app-orange: #F89F5B;
-    --app-green: #18bfa1;
+    --app-green: #0b9c71;
     --app-blue: #33c0df;
     --app-green-tint: rgba(100,255,218,0.1);
 
@@ -85,6 +85,43 @@ section.main {
     padding: 20px 0px;
     position: relative;
     z-index: 1;
+}
+
+.autocomplete-results {
+    position: absolute;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 10px;
+    width: 50%;
+}
+
+.autocomplete-item {
+    padding: 10px;
+    background-color: var(--app-white);
+    border-bottom: var(--app-rich-black);
+    color: var(--app-dark-text-color);
+}
+
+.autocomplete-item:first-child {
+    border-top-left-radius: var(--app-border-radius);
+    border-top-right-radius: var(--app-border-radius);
+}
+
+.autocomplete-item:last-child {
+    border-bottom-left-radius: var(--app-border-radius);
+    border-bottom-right-radius: var(--app-border-radius);
+}
+
+.autocomplete-item:not(.not-found) {
+    cursor: pointer;
+}
+
+.autocomplete-item:not(.not-found):hover {
+    background-color: var(--app-pink);
+    color: var(--app-light-text-color);
 }
 
 .match {

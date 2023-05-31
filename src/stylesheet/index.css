@@ -121,31 +121,6 @@ section .main-container .filter-container .autocomplete-movies {
     display: inline-block;
 }
 
-section .main-container .filter-container .autocomplete-movies .autocomplete-results {
-    position: absolute;
-    border-top: none;
-    z-index: 99;
-    top: 100%;
-    left: 0;
-    right: 0;
-}
-
-section .main-container .filter-container .autocomplete-movies .autocomplete-results .autocomplete-item {
-    padding: 10px;
-    background-color: var(--app-medium-grey);
-    border-bottom: var(--app-rich-black);
-    color: var(--app-light-text-color);
-}
-
-section .main-container .filter-container .autocomplete-movies .autocomplete-results .autocomplete-item:not(.not-found) {
-    cursor: pointer;
-}
-
-section .main-container .filter-container .autocomplete-movies .autocomplete-results .autocomplete-item:not(.not-found):hover {
-    background-color: var(--app-light-bg);
-    color: var(--app-dark-text-color);
-}
-
 section .main-container .filter-container .autocomplete-movies .movie-search-container {
     height: 46px;
     background-color: rgba(255, 255, 255, 0.1);
@@ -176,31 +151,6 @@ section .main-container .filter-container .autocomplete-cities {
     display: inline-block;
 }
 
-section .main-container .filter-container .autocomplete-cities .autocomplete-results {
-    position: absolute;
-    border-top: none;
-    z-index: 99;
-    top: 100%;
-    left: 0;
-    right: 0;
-}
-
-section .main-container .filter-container .autocomplete-cities .autocomplete-results .autocomplete-item {
-    padding: 10px;
-    background-color: var(--app-medium-grey);
-    border-bottom: var(--app-rich-black);
-    color: var(--app-light-text-color);
-}
-
-section .main-container .filter-container .autocomplete-cities .autocomplete-results .autocomplete-item:not(.not-found) {
-    cursor: pointer;
-}
-
-section .main-container .filter-container .autocomplete-cities .autocomplete-results .autocomplete-item:not(.not-found):hover {
-    background-color: var(--app-light-bg);
-    color: var(--app-dark-text-color);
-}
-
 section .main-container .filter-container .city-search-container {
     height: 46px;
     background-color: rgba(255, 255, 255, 0.1);
@@ -221,8 +171,10 @@ section .main-container .filter-container .city-search-container .city-search {
     border: 1px solid transparent;
 }
 
-section .main-container .filter-container .city-search-container .city-search:focus, .city-search-container {
-    border: 1px solid rgba(255, 255, 255, 0.041);
+section .main-container .filter-container .city-search-container .city-search:focus {
+    border-top: 1px solid rgba(255, 255, 255, 0.041);
+    border-left: 1px solid rgba(255, 255, 255, 0.041);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.041);
     border-radius: var(--app-border-radius);
 }
 
@@ -287,6 +239,70 @@ section .main-container .movie-grid {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
     }
+}
+
+section .main-container .movie-grid .movie-card {
+    transition: var(--app-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+
+section .main-container .movie-grid .movie-card .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+  
+section .main-container .movie-grid .movie-card.movie-card:hover .overlay {
+    opacity: 1;
+}
+  
+section .main-container .movie-grid .movie-card .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--app-rich-black);
+    text-align: center;
+    color: var(--app-light-text-color);
+}
+  
+section .main-container .movie-grid .movie-card .info .year,
+section .main-container .movie-grid .movie-card .info .category {
+    margin: 0;
+    font-size: var(--app-p-font-small);
+}
+
+section .main-container .movie-grid .movie-card .info .year {
+    color: var(--app-green);
+    font-weight: 700;
+}
+
+section .main-container .movie-grid .movie-card .info .category {
+    color: var(--app-dark-text-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+section .main-container .movie-grid .movie-card .info .category .genre {
+    background-color: var(--app-white);
+    border-radius: var(--app-border-radius);
+    padding: 2px 5px;
+}
+
+section .main-container .movie-grid .movie-card img {
+    box-shadow: var(--app-navy-shadow);
+}
+
+section .main-container .movie-grid .movie-card:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
 }
 
 section .main-container .movie-grid .movie-card p.title{
