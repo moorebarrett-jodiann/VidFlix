@@ -49,8 +49,8 @@ function printMovies() {
                             <p class="year">${movie.year}</p>
                             <p class="category">${categories}</p>
                         </div>
-                        </div>
-                        <img class="movie-img" src="${movie.image}" alt="${movie.title}">
+                    </div>
+                    <img class="movie-img" src="${movie.image}" alt="${movie.title}">
                     <p class="title">${movie.title}</p>
                 </div>
                 `;
@@ -195,6 +195,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
+// manually load default city
 window.onload = function () {
     citySearchInput.value = "Winnipeg";
 };
