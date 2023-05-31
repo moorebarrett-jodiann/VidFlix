@@ -299,6 +299,7 @@ section .main-container .movie-grid .movie-card .info .category .genre {
     border-radius: var(--app-border-radius);
     padding: 3px 7px;
     margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 section .main-container .movie-grid .movie-card img {

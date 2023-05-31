@@ -68,7 +68,7 @@ function printMovies() {
 
 // Fetch the movie titles from the JSON file and populate an array to be used for autocomplete
 function populateAutoCompleteMovieSearchList() {
-    return fetch(moviesUrl)
+    return fetch(moviesUrl, options)
         .then(response => response.json())
         .then(data => {
             movieTitles.push(...data.movies.map(movie => movie.title));
@@ -80,7 +80,7 @@ function populateAutoCompleteMovieSearchList() {
 
 // Fetch the cities from the JSON file and populate an array to be used for autocomplete
 function populateAutoCompleteCitySearchList() {
-    return fetch(citiesUrl)
+    return fetch(citiesUrl, options)
         .then(response => response.json())
         .then(data => {
             cities.push(...data.cities.map(city => city.name));
