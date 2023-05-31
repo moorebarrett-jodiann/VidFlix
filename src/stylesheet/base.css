@@ -14,6 +14,7 @@
     --app-grey-text-color: #343434;
     
     /*colors*/
+    --app-rich-black:rgba(27, 27, 46, 0.11);
     --app-rich-black:#1b1b2e;
     --app-navy: #0a192f;
     --app-light-navy: #112240;

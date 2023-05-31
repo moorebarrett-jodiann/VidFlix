@@ -253,7 +253,7 @@ section .main-container .movie-grid .movie-card .overlay {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 90.6%;
     background-color: rgba(0, 0, 0, 0.7);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -265,35 +265,40 @@ section .main-container .movie-grid .movie-card.movie-card:hover .overlay {
   
 section .main-container .movie-grid .movie-card .info {
     position: absolute;
-    bottom: 0;
+    bottom: 40%;
     left: 0;
     width: 100%;
-    background-color: var(--app-rich-black);
+    background-color: rgba(27, 27, 46, 0.9);
     text-align: center;
     color: var(--app-light-text-color);
+    padding: 10px 0px;
+    box-shadow: var(--app-navy-shadow);
 }
   
 section .main-container .movie-grid .movie-card .info .year,
 section .main-container .movie-grid .movie-card .info .category {
     margin: 0;
-    font-size: var(--app-p-font-small);
 }
 
 section .main-container .movie-grid .movie-card .info .year {
+    font-size: var(--app-p-font-regular);
     color: var(--app-green);
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
 section .main-container .movie-grid .movie-card .info .category {
-    color: var(--app-dark-text-color);
+    color: var(--app-light-text-color);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    font-size: var(--app-p-font-small);
 }
 
 section .main-container .movie-grid .movie-card .info .category .genre {
-    background-color: var(--app-white);
+    background-color: var(--app-medium-grey);
     border-radius: var(--app-border-radius);
-    padding: 2px 5px;
+    padding: 3px 7px;
+    margin-right: 5px;
 }
 
 section .main-container .movie-grid .movie-card img {
