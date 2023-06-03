@@ -41,7 +41,7 @@ header .logo-container h2:hover {
     }
 
     nav ul li a {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 600;
         letter-spacing: var(--app-letter-spacing);
         cursor: pointer;
@@ -190,10 +190,12 @@ section .main-container .filter-container .city-search-container button {
     font-size: var(--app-p-font-regular);
     color: var(--app-light-text-color);
     transition: var(--app-transition);
+    border: 1px solid transparent;
 }
 
 section .main-container .filter-container .city-search-container button:hover {
     background-color: var(--app-pink-hover);
+    border: 1px solid var(--app-pink-hover-border);
 }
 
 section .main-container .movie-grid {

@@ -1,8 +1,6 @@
 'use-strict';
 
 import {select, print, onEvent } from './utils.js';
-import cityInfo from './cities.js';
-import movieInfo from './movie-titles.js';
 
 // ======== VARIABLES =====================================================================================================
 const citySearchInput = select('section .main-container .filter-container .city-search-container .city-search');

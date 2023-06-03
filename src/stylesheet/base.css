@@ -25,8 +25,9 @@
     --app-light-slate: #a8b2d1;
     --app-lightest-slate: #ccd6f6;
     
-    --app-pink:#be236a;
-    --app-pink-hover:#9e255b;
+    --app-pink:#FF1493;
+    --app-pink-hover:#ff1f96;
+    --app-pink-hover-border:#f7a1c862;
     --app-orange: #F89F5B;
     --app-green: #0b9c71;
     --app-blue: #33c0df;
